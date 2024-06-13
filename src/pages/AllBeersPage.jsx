@@ -6,18 +6,23 @@ import { Link } from "react-router-dom";
 function AllBeersPage() {
     const [beers, setBeers] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [search, setSearch] = useState("")
 
 
     useEffect(() => {
-        listBeers()
+        listBeers(search)
         .then((beers) => setBeers(beers))
         .catch((error) => console.error(error))
         .finally(() => setLoading(false))
-}, []);
+}, [search]);
 
     return (
        <div>
         <h2>All Beers</h2>
+
+        <label htmlFor="search">Search</label>
+        <input type="text" value={search} onChange={(event) => setSearch(event.target.value)}></input>
+
     { loading ? <p>loading...</p> : (
         <ul>
             {beers.map((beer) => (

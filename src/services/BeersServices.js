@@ -12,8 +12,8 @@ http.interceptors.response.use(
     }
 )
 
-export const listBeers = () => {
-    return http.get("/");
+export const listBeers = (searchQuery) => {
+    return searchQuery ? http.get(`/search?q=${searchQuery}`) : http.get("/");
 }
 
 export const randomBeer = () => {
